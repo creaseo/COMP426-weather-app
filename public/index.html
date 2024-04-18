@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #weather-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #location-display-container {
+            margin-top: 50px;
+        }
+        #weather-image {
+            max-width: 500px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <h1>Weather App</h1>
+    <br>
+    <form id="location-form">
+        <label for="location">Enter Location:</label>
+        <input type="text" id="location" name="location" required>
+        <button type="submit">Get Weather</button>
+    </form>
+    <div id="location-display-container">
+        <div id="location-display"></div>
+    </div>
+    <div id="weather-container">
+        <p id="weather-description"></p>
+        <p id="temperature"></p>
+        <img id="weather-image" src="">
+    </div>
+
+    <script>
+        document.getElementById('location-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const locationInput = document.getElementById('location');
+            const location = locationInput.value.trim();
+
+            if (!location) {
+                alert('Please enter a location.');
+                return;
+            }
+
+            const locationDisplay = document.getElementById('location-display');
+            const weatherDescription = document.getElementById('weather-description');
+            const temperature = document.getElementById('temperature');
+            const weatherImage = document.getElementById('weather-image');
+
+            locationDisplay.textContent = `Weather for: ${location}`;
+
+            try {
+                const response = await fetch(`/weather?location=${location}`);
+                const weatherInfo = await response.json();
+
+                if (weatherInfo) {
+                    weatherDescription.textContent = `Description: ${weatherInfo.description}`;
+                    temperature.textContent = `Temperature: ${weatherInfo.temperature} °F`;
+                    weatherImage.src = weatherInfo.imageUrl;
+                    weatherImage.style.display = 'block';
+                } else {
+                    weatherDescription.textContent = '';
+                    temperature.textContent = '';
+                    weatherImage.src = '';
+                    weatherImage.style.display = 'none';
+                    alert('Failed to fetch weather information.');
+                }
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+                alert('Failed to fetch weather information.');
+            }
+            locationInput.value = '';
+        });
+    </script>
+</body>
+</html>
