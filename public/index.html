@@ -28,6 +28,9 @@
             cursor: "pointer";
             display: none;
         }
+        #favorites {
+            align-items: center;
+        }
         .hidden {
             display: none;
         }
@@ -56,8 +59,9 @@
             <label for="location">Enter Location:</label>
             <input type="text" id="location" name="location" required>
             <button type="submit">Get Weather</button>
-            <div id="favoritesList">
+            <div id="favorites">
                 <p>Favorites</p>
+                <div id="favoritesList"></div>
             </div>
         </form>
         <div id="location-display-container">
@@ -72,51 +76,5 @@
     </div>
 
     <script src="app.js"></script>
-    <script>
-        document.getElementById('location-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            const locationInput = document.getElementById('location');
-            const location = locationInput.value.trim();
-
-            if (!location) {
-                alert('Please enter a location.');
-                return;
-            }
-
-            const locationDisplay = document.getElementById('location-display');
-            const weatherDescription = document.getElementById('weather-description');
-            const temperature = document.getElementById('temperature');
-            const weatherImage = document.getElementById('weather-image');
-            const favButton = document.getElementById('fav-button')
-
-            locationDisplay.textContent = `Weather for: ${location}`;
-
-            try {
-                const response = await fetch(`/weather?location=${location}`);
-                const weatherInfo = await response.json();
-
-                if (weatherInfo) {
-                    weatherDescription.textContent = `Description: ${weatherInfo.description}`;
-                    temperature.textContent = `Temperature: ${weatherInfo.temperature} °F`;
-                    weatherImage.src = weatherInfo.imageUrl;
-                    weatherImage.style.display = 'block';
-                    favButton.style.display = 'block';
-                    
-                } else {
-                    weatherDescription.textContent = '';
-                    temperature.textContent = '';
-                    weatherImage.src = '';
-                    weatherImage.style.display = 'none';
-                    favButton.style.display = 'none';
-                    alert('Failed to fetch weather information.');
-                }
-            } catch (error) {
-                console.error('Error fetching weather:', error);
-                alert('Failed to fetch weather information.');
-            }
-            // locationInput.value = '';
-        });
-    </script>
 </body>
 </html>

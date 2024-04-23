@@ -9,9 +9,14 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// LILA'S API KEYS
 const OPENWEATHERMAP_API_KEY = '6e20dc2507a1ed015f8094bfecba53ea';
-const GOOGLE_API_KEY = 'AIzaSyAaph6fXjkWcaYsWBRXMWVD9CYDsvNJYoI';
+// const GOOGLE_API_KEY = 'AIzaSyAaph6fXjkWcaYsWBRXMWVD9CYDsvNJYoI';
 const GOOGLE_CX = 'd581af531cd44425a';
+
+// CHRIS'S API KEYS
+const GOOGLE_API_KEY = 'AIzaSyDG4aTR9c-LPzomHOU-dWruxj3yYllxT78'
 
 // Mongoose + MongoDB
 
@@ -36,6 +41,8 @@ app.post('/register', async (req, res) => {
 
 app.post('/favorite', async (req, res) => {
     const { userId, locationName } = req.body;
+    console.log(userId);
+    console.log(locationName);
     try {
         const newFav = new Favorite({ userId, locationName });
         await newFav.save();
@@ -48,7 +55,7 @@ app.post('/favorite', async (req, res) => {
 app.get('/favorites/:username', async (req, res) => {
     const userId = req.params.username;
     try {
-      const favorites = await Favorite.find({ userId }).exec();  // Assuming username is a field in Favorite
+      const favorites = await Favorite.find({ userId }).exec();
       res.json(favorites);
     } catch (error) {
       console.error('Error fetching favorites:', error);

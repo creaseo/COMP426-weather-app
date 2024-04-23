@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+
     document.getElementById('login-form').addEventListener('submit', async function(event) {
         event.preventDefault();
         const username = document.getElementById('login-username').value;
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Error registering');
         }
     });
-    
+
     document.getElementById('fav-button').addEventListener('click', async function(event) {
         event.preventDefault();
         const locationName = document.getElementById('location').value;
@@ -65,16 +66,65 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchFavorites(userId);
     });
 
-    document.getElementById('location-form').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const location = document.getElementById('location').value;
-        fetchWeather(location);
-    });
+});
 
+async function fetchAndDisplayWeather(location) {
+    if (!location) {
+        alert('Please enter a location.');
+        return;
+    }
+
+    const locationDisplay = document.getElementById('location-display');
+    const weatherDescription = document.getElementById('weather-description');
+    const temperature = document.getElementById('temperature');
+    const weatherImage = document.getElementById('weather-image');
+    const favButton = document.getElementById('fav-button');
+
+    locationDisplay.textContent = `Weather for: ${location}`;
+
+    try {
+        const response = await fetch(`/weather?location=${encodeURIComponent(location)}`);
+        const weatherInfo = await response.json();
+
+        if (weatherInfo && weatherInfo.description) {
+            weatherDescription.textContent = `Description: ${weatherInfo.description}`;
+            temperature.textContent = `Temperature: ${weatherInfo.temperature} °F`;
+            weatherImage.src = weatherInfo.imageUrl;
+            weatherImage.style.display = 'block';
+            favButton.style.display = 'block';
+        } else {
+            alert('Failed to fetch weather information.');
+        }
+    } catch (error) {
+        console.error('Error fetching weather:', error);
+        alert('Failed to fetch weather information.');
+    }
+}
+
+function displayFavorites(favorites) {
+    const favoritesList = document.getElementById('favoritesList');
+    favoritesList.innerHTML = '';
+
+    favorites.forEach(fav => {
+        const item = document.createElement('li');
+        item.textContent = fav.locationName;
+        item.style.cursor = 'pointer'; // Make it look clickable
+        item.addEventListener('click', () => fetchAndDisplayWeather(fav.locationName));
+
+        favoritesList.appendChild(item);
+    });
+}
+
+document.getElementById('location-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const locationInput = document.getElementById('location');
+    const location = locationInput.value.trim();
+
+    fetchAndDisplayWeather(location);
 });
 
 async function fetchFavorites(username) {
-    console.log("THiS IS RUNNING");
     try {
         const response = await fetch(`/favorites/${username}`);
         if (response.ok) {
@@ -82,26 +132,10 @@ async function fetchFavorites(username) {
             const list = document.getElementById('favoritesList');
             list.innerHTML = '';  // Clear existing items
             displayFavorites(favorites);
-            // favorites.forEach(fav => {
-            //     const item = document.createElement('div');
-            //     item.textContent = fav.locationName;
-            //     list.appendChild(item);
-            // });
         } else {
             console.error('Failed to fetch favorites');
         }
     } catch (error) {
         console.error('Error loading favorites:', error);
     }
-}
-
-function displayFavorites(favorites) {
-    const favoritesList = document.getElementById('favoritesList'); // Ensure this element exists in your HTML
-    favoritesList.innerHTML = '';  // Clear existing entries
-
-    favorites.forEach(fav => {
-        const item = document.createElement('li');
-        item.textContent = fav.locationName; // Assuming the favorite object has a 'locationName' property
-        favoritesList.appendChild(item);
-    });
 }
