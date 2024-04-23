@@ -1,5 +1,6 @@
 const express = require('express');
-const User = require('./User');
+const User = require('./models/User');
+const Favorite = require('./models/Favorite');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const path = require('path');
 
@@ -20,7 +21,6 @@ mongoose.connect('mongodb+srv://kurisu:bEgqpdInQ75YLHFZ@cluster0.132qpjy.mongodb
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-
 app.use(express.json());
 
 app.post('/register', async (req, res) => {
@@ -31,6 +31,28 @@ app.post('/register', async (req, res) => {
         res.status(201).send('User registered');
     } catch (error) {
         res.status(500).send('Error registering user');
+    }
+});
+
+app.post('/favorite', async (req, res) => {
+    const { userId, locationName } = req.body;
+    try {
+        const newFav = new Favorite({ userId, locationName });
+        await newFav.save();
+        res.status(201).send('Location saved');
+    } catch (error) {
+        res.status(500).send('Error favoriting location');
+    }
+});
+
+app.get('/favorites/:username', async (req, res) => {
+    const userId = req.params.username;
+    try {
+      const favorites = await Favorite.find({ userId }).exec();  // Assuming username is a field in Favorite
+      res.json(favorites);
+    } catch (error) {
+      console.error('Error fetching favorites:', error);
+      res.status(500).send('Failed to retrieve favorites');
     }
 });
 

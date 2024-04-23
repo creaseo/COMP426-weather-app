@@ -22,6 +22,12 @@
             max-width: 500px;
             margin-top: 20px;
         }
+        #fav-button {
+            padding: "10px 20px";
+            margin-top: 20px;
+            cursor: "pointer";
+            display: none;
+        }
         .hidden {
             display: none;
         }
@@ -50,6 +56,9 @@
             <label for="location">Enter Location:</label>
             <input type="text" id="location" name="location" required>
             <button type="submit">Get Weather</button>
+            <div id="favoritesList">
+                <p>Favorites</p>
+            </div>
         </form>
         <div id="location-display-container">
             <div id="location-display"></div>
@@ -58,6 +67,7 @@
             <p id="weather-description"></p>
             <p id="temperature"></p>
             <img id="weather-image" src="">
+            <button id="fav-button" type="button">Favorite</button>
         </div>
     </div>
 
@@ -78,6 +88,7 @@
             const weatherDescription = document.getElementById('weather-description');
             const temperature = document.getElementById('temperature');
             const weatherImage = document.getElementById('weather-image');
+            const favButton = document.getElementById('fav-button')
 
             locationDisplay.textContent = `Weather for: ${location}`;
 
@@ -90,18 +101,21 @@
                     temperature.textContent = `Temperature: ${weatherInfo.temperature} °F`;
                     weatherImage.src = weatherInfo.imageUrl;
                     weatherImage.style.display = 'block';
+                    favButton.style.display = 'block';
+                    
                 } else {
                     weatherDescription.textContent = '';
                     temperature.textContent = '';
                     weatherImage.src = '';
                     weatherImage.style.display = 'none';
+                    favButton.style.display = 'none';
                     alert('Failed to fetch weather information.');
                 }
             } catch (error) {
                 console.error('Error fetching weather:', error);
                 alert('Failed to fetch weather information.');
             }
-            locationInput.value = '';
+            // locationInput.value = '';
         });
     </script>
 </body>
