@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('./User');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const path = require('path');
 
@@ -11,6 +12,41 @@ const OPENWEATHERMAP_API_KEY = '6e20dc2507a1ed015f8094bfecba53ea';
 const GOOGLE_API_KEY = 'AIzaSyAaph6fXjkWcaYsWBRXMWVD9CYDsvNJYoI';
 const GOOGLE_CX = 'd581af531cd44425a';
 
+// Mongoose + MongoDB
+
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://kurisu:bEgqpdInQ75YLHFZ@cluster0.132qpjy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
+
+app.use(express.json());
+
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const newUser = new User({ username, password });
+        await newUser.save();
+        res.status(201).send('User registered');
+    } catch (error) {
+        res.status(500).send('Error registering user');
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await User.findOne({ username });
+        if (user && user.password === password) {
+            res.json({ message: 'Login successful' });
+        } else {
+            res.status(401).json({ message: 'Invalid credentials' });
+        }
+    } catch (error) {
+        res.status(500).send('Error logging in');
+    }
+});
 app.get('/weather', async (req, res) => {
     try {
         const location = req.query.location;
