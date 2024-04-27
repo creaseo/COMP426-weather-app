@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#location-display-container {
+    margin-top: 50px;
+}
+
+#weather-image {
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+#fav-button {
+    padding: "10px 20px";
+    margin-top: 20px;
+    cursor: "pointer";
+    display: none;
+}
+
+#favorites {
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
