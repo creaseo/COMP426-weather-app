@@ -52,6 +52,18 @@ app.post('/favorite', async (req, res) => {
     }
 });
 
+app.delete('/favorite/delete', async (req, res) => {
+    const { userId, locationName } = req.body;
+    try {
+        await Favorite.deleteOne({ userId, locationName });
+        res.status(200).send('Location deleted successfully');
+    } catch (error) {
+        console.error('Error deleting favorite:', error);
+        res.status(500).send('Error deleting location');
+    }
+});
+
+
 app.get('/favorites/:username', async (req, res) => {
     const userId = req.params.username;
     try {
