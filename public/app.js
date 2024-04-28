@@ -108,12 +108,34 @@ function displayFavorites(favorites) {
     favorites.forEach(fav => {
         const item = document.createElement('li');
         item.textContent = fav.locationName;
-        item.style.cursor = 'pointer'; // Make it look clickable
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/favorite/delete', {
+                    method: 'DELETE',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ userId: fav.userId, locationName: fav.locationName })
+                });
+                const result = await response.text();
+                alert(result);
+                fetchFavorites(fav.userId);
+            } catch (error) {
+                console.error('Error deleting favorite:', error);
+                alert('Error deleting favorite');
+            }
+        });
+
+        item.appendChild(deleteButton);
+
+        item.style.cursor = 'pointer';
         item.addEventListener('click', () => fetchAndDisplayWeather(fav.locationName));
 
         favoritesList.appendChild(item);
     });
 }
+
 
 document.getElementById('location-form').addEventListener('submit', async function(event) {
     event.preventDefault();
