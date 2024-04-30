@@ -29,9 +29,9 @@ mongoose.connect('mongodb+srv://kurisu:bEgqpdInQ75YLHFZ@cluster0.132qpjy.mongodb
 app.use(express.json());
 
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, pin } = req.body;
     try {
-        const newUser = new User({ username, password });
+        const newUser = new User({ username, password , pin});
         await newUser.save();
         res.status(201).send('User registered');
     } catch (error) {
@@ -129,8 +129,8 @@ app.put('/user/password', async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        if (user.password !== oldPassword) {
-            return res.status(401).json({ message: 'Invalid old password' });
+        if (user.pin !== oldPassword) {
+            return res.status(401).json({ message: 'Invalid Pin' });
         }
         user.password = newPassword;
         await user.save();

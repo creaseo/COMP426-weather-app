@@ -15,27 +15,57 @@
     <h1>Weather App</h1>
     <br>
     <div id="auth-container">
-        <h2>Login or Register</h2>
-        <form id="login-form">
-            <input type="text" id="login-username" placeholder="Username" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button type="submit" class="button-1">Login</button>
-        </form>
-        <br>
-        <form id="register-form">
-            <input type="text" id="register-username" placeholder="Username" required>
-            <input type="password" id="register-password" placeholder="Password" required>
-            <button type="submit" class="button-1">Register</button>
-        </form>
-        <br>
-        <form id="change-password-form">
-            <h3>Change Password</h3>
-            <input type="text" id="change-password-username" placeholder="Username" required>
-            <input type="password" id="current-password" placeholder="Current Password" required>
-            <input type="password" id="new-password" placeholder="New Password" required>
-            <input type="password" id="confirm-new-password" placeholder="Confirm New Password" required>
-            <button type="submit" class="button-1">Change Password</button>
-        </form>
+        <svg id="cloud" stroke="white" fill="white" stroke-width="0" viewBox="0 0 640 512" height="40%" width="40%" xmlns="http://www.w3.org/2000/svg"><path d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4z"></path></svg>
+        <script>
+            function toggleForm(formId) {
+              var forms = document.querySelectorAll('#auth-container > div');
+        
+              forms.forEach(function(form) {
+                if (form.id === formId) {
+                  form.classList.remove('hidden');
+                } else {
+                  form.classList.add('hidden');
+                }
+              });
+            }
+          </script>
+        <div id="signup" class="hidden">
+            <h2>SIGN UP</h2>
+            <form id="register-form">
+                <input type="text" id="register-username" placeholder="Username" required><br>
+                <input type="password" id="register-password" placeholder="Password" required><br>
+                <input type="text" id="register-pin" placeholder="4-digit pin" required><br>
+                <button type="submit" class="button-1" id="registerbutton">Register</button>
+            </form>
+            <p>Already a user? <a href="#" onclick="toggleForm('login')">LOGIN</a></p>
+          </div>
+      
+          <div id="login">
+            <h2>LOGIN</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Username" required><br>
+                <input type="password" id="login-password" placeholder="Password" required><br>
+                <a href="#" onclick="toggleForm('forgot')">Forgot password?</a><br>
+                <button type="submit" class="button-1" id="loginbutton">Login</button>
+            </form>
+            <p>Need an account? <a href="#" onclick="toggleForm('signup')">SIGN UP</a></p>
+          </div>
+
+          <div id="forgot" class="hidden">
+            <h2>RESET PASSWORD</h2>
+            <form id="change-password-form">
+                <input type="text" id="change-password-username" placeholder="Username" required><br>
+                <input type="text" id="pin" placeholder="4-digit Pin" required><br>
+                <input type="password" id="new-password" placeholder="New Password" required><br>
+                <input type="password" id="confirm-new-password" placeholder="Confirm New Password" required><br>
+                <button type="submit" class="button-1" id="changepassbutton">Change Password</button><br><br>
+                <a href="#" onclick="toggleForm('login')">RETURN TO LOGIN</a>
+            </form>
+          </div>
+
+
+
+        
     </div>
 
     <div id="weather-app" class="hidden">

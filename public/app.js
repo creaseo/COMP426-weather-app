@@ -29,12 +29,13 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         const username = document.getElementById('register-username').value;
         const password = document.getElementById('register-password').value;
+        const pin = document.getElementById('register-pin').value;
 
         try {
             const response = await fetch('/register', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username, password})
+                body: JSON.stringify({username, password, pin})
             });
             const result = await response.text();
             alert(result);
@@ -69,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('change-password-form').addEventListener('submit', async function(event) {
         event.preventDefault();
         const username = document.getElementById('change-password-username').value;
-        const currentPassword = document.getElementById('current-password').value;
+        const currentPin = document.getElementById('pin').value;
         const newPassword = document.getElementById('new-password').value;
         const confirmNewPassword = document.getElementById('confirm-new-password').value;
 
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch('/user/password', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, oldPassword: currentPassword, newPassword })
+                body: JSON.stringify({ username, oldPassword: currentPin, newPassword })
             });
 
             if (response.ok) {

@@ -1,7 +1,7 @@
 body {
     font-family: 'Varela Round', sans-serif;
     text-align: center !important;
-    background-color: #69D2E7
+    background-color: #5fcef7
 }
 
 #weather-container {
@@ -38,7 +38,8 @@ body {
 h1 {
     font-family: 'Varela Round', sans-serif;
     font-size: 10vh !important;
-    margin-top: 5vh;
+    margin-top: 15vh;
+    margin-bottom: 0%;
     color: white;
 }
 
@@ -58,7 +59,7 @@ input[type="password"]{
 /* CSS */
 
 .button-1, #fav-button, .weather-button, #delete-button {
-  background-color: #345df3;
+  background-color: #5fcef7;
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
@@ -86,10 +87,57 @@ input[type="password"]{
 
 .button-1:hover,
 .button-1:focus {
-  background-color: #5577f5;
+  background-color: #4290ac;
 }
 
 #weather-image {
     border-radius: 15px;
+}
+
+auth-container {
+    position: absolute;
+    align-items: center;
+    /*transform: translate(115%);*/
+
+}
+#login-username, #login-password, #register-username, #register-password, #register-pin, #change-password-username, #new-password,#pin, #confirm-new-password {
+    margin: 5px;
+}
+#loginbutton, #registerbutton {
+    margin: 5px;
+    padding-left: 55px;
+    padding-right: 55px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#changepassbutton {
+    margin: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+a{
+    text-decoration: none;
+    color: slategray;
+}
+a:visited{
+    color: slategray;
+}
+#login{
+    position: absolute;
+    top: 48%;
+    right: 44%;
+}
+#signup{
+    position: absolute;
+    top: 48%;
+    right: 45%;
+}
+#forgot{
+    position: absolute;
+    top: 45%;
+    right: 43%;
 }
 
