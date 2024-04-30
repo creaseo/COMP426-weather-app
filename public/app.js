@@ -66,6 +66,37 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchFavorites(userId);
     });
 
+    document.getElementById('change-password-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const username = document.getElementById('change-password-username').value;
+        const currentPassword = document.getElementById('current-password').value;
+        const newPassword = document.getElementById('new-password').value;
+        const confirmNewPassword = document.getElementById('confirm-new-password').value;
+
+        if (newPassword !== confirmNewPassword) {
+            alert('New passwords do not match!');
+            return;
+        }
+
+        try {
+            const response = await fetch('/user/password', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, oldPassword: currentPassword, newPassword })
+            });
+
+            if (response.ok) {
+                alert('Password changed successfully');
+            } else {
+                const data = await response.json();
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error('Error changing password:', error);
+            alert('Error changing password. Please try again later.');
+        }
+    });
+
 });
 
 async function fetchAndDisplayWeather(location) {
@@ -152,7 +183,7 @@ async function fetchFavorites(username) {
         if (response.ok) {
             const favorites = await response.json();
             const list = document.getElementById('favoritesList');
-            list.innerHTML = '';  // Clear existing items
+            list.innerHTML = '';
             displayFavorites(favorites);
         } else {
             console.error('Failed to fetch favorites');

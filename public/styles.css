@@ -19,7 +19,7 @@ body {
     margin-top: 20px;
 }
 
-#fav-button {
+#fav-button #toggle-unit{
     padding: "10px 20px";
     margin-top: 20px;
     cursor: "pointer";

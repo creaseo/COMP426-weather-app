@@ -122,6 +122,26 @@ app.get('/weather', async (req, res) => {
     }
 });
 
+app.put('/user/password', async (req, res) => {
+    const { username, oldPassword, newPassword } = req.body;
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        if (user.password !== oldPassword) {
+            return res.status(401).json({ message: 'Invalid old password' });
+        }
+        user.password = newPassword;
+        await user.save();
+        res.status(200).json({ message: 'Password changed successfully' });
+    } catch (error) {
+        console.error('Error changing password:', error);
+        res.status(500).json({ message: 'Error changing password' });
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
