@@ -1,6 +1,7 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+    font-family: 'Varela Round', sans-serif;
+    text-align: center !important;
+    background-color: #69D2E7
 }
 
 #weather-container {
@@ -33,3 +34,62 @@ body {
 .hidden {
     display: none;
 }
+
+h1 {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 10vh !important;
+    margin-top: 5vh;
+    color: white;
+}
+
+h2 {
+    font-family: 'Varela Round', sans-serif;
+
+}
+
+input[type="text"] {
+    font-family: 'Varela Round', sans-serif;
+}
+
+input[type="password"]{
+    font-family: 'Varela Round', sans-serif;
+}
+
+/* CSS */
+
+.button-1, #fav-button, .weather-button, #delete-button {
+  background-color: #345df3;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Varela Round', sans-serif;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+.button-1:hover,
+.button-1:focus {
+  background-color: #5577f5;
+}
+
+#weather-image {
+    border-radius: 15px;
+}
+

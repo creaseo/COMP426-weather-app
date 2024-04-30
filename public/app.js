@@ -142,6 +142,7 @@ function displayFavorites(favorites) {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
+        deleteButton.id = 'delete-button';
         deleteButton.addEventListener('click', async () => {
             try {
                 const response = await fetch('/favorite/delete', {
