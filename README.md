@@ -20,6 +20,7 @@ We developed a weather app that displays the description, temperature, and corre
 - If you are a new user, please register by creating a unique username and a password of your choosing.
 - Upon registration, the application will not automatically log you in -- once successfully registered, please enter your new credentials in the login prompt
 - Should there be any errors with registration or logging in, an alert should inform you
+- User's are also able to change their password if they choose and this interface is located underneath teh registering and login prompts
 
 ## Main Application
 - Once logged in, you should see our main application which includes a search box that allows you to search up any city
@@ -50,4 +51,5 @@ We have two model objects which are the User model and the Favorite model.
 - locationName saves the name of the city that the user has favorited
 
 # API Documentation
-- 
+- We have implemented 7 API endpoints which are used to implement features we believe are necessary/useful for our application. These include GET methods for the user's favorites and also weather, POST methods for Logging in, registering, and favoriting, a PUT method for changing a User's password, and a DELETE method to delete favorite locations
+- Our API endpoints are located in the server.js file
