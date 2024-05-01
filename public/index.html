@@ -27,6 +27,21 @@
                   form.classList.add('hidden');
                 }
               });
+              const err = document.getElementById('signup-error');
+              if (err){
+                err.style.display = 'none';
+              }
+              const erro = document.getElementById('error-message')
+              if (erro){
+                erro.style.display = 'none';
+              }
+              const rError = document.getElementById('reset-error')
+              if (rError){
+                rError.style.display = 'none';
+              }
+              var currentForm = document.getElementById(formId);
+              var inputFields = currentForm.querySelectorAll('input');
+              inputFields.forEach(function(input) {input.value = '';});
             }
           </script>
         <div id="signup" class="hidden">
@@ -36,6 +51,7 @@
                 <input type="password" id="register-password" placeholder="Password" required><br>
                 <input type="text" id="register-pin" placeholder="4-digit pin" required><br>
                 <button type="submit" class="button-1" id="registerbutton">Register</button>
+                <div id="signup-error" style="display: none;"></div>
             </form>
             <p>Already a user? <a href="#" onclick="toggleForm('login')">LOGIN</a></p>
           </div>
@@ -47,6 +63,7 @@
                 <input type="password" id="login-password" placeholder="Password" required><br>
                 <a href="#" onclick="toggleForm('forgot')">Forgot password?</a><br>
                 <button type="submit" class="button-1" id="loginbutton">Login</button>
+                <div id="error-message" style="display: none;"></div>
             </form>
             <p>Need an account? <a href="#" onclick="toggleForm('signup')">SIGN UP</a></p>
           </div>
@@ -58,7 +75,8 @@
                 <input type="text" id="pin" placeholder="4-digit Pin" required><br>
                 <input type="password" id="new-password" placeholder="New Password" required><br>
                 <input type="password" id="confirm-new-password" placeholder="Confirm New Password" required><br>
-                <button type="submit" class="button-1" id="changepassbutton">Change Password</button><br><br>
+                <button type="submit" class="button-1" id="changepassbutton">Change Password</button><br>
+                <div id="reset-error" style="display: none;"></div><br>
                 <a href="#" onclick="toggleForm('login')">RETURN TO LOGIN</a>
             </form>
           </div>

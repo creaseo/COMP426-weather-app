@@ -16,12 +16,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('weather-app').style.display = 'block';
                 fetchFavorites(username);
+                const errorMessageDiv = document.getElementById('error-message');
+                errorMessageDiv.textContent = '';
+                errorMessageDiv.style.display = 'hidden'; 
             } else {
-                alert('Login failed!');
+                //alert('Login failed!');
+                const errorMessageDiv = document.getElementById('error-message');
+                errorMessageDiv.textContent = 'Login failed!';
+                errorMessageDiv.style.display = 'block'; 
+                errorMessageDiv.style.color = 'red';
             }
         } catch (error) {
             console.error('Login error:', error);
-            alert('Error logging in');
+            //alert('Error logging in');
+            const errorMessageDiv = document.getElementById('error-message');
+            errorMessageDiv.textContent = 'Error logging in';
+            errorMessageDiv.style.display = 'block'; 
         }
     });
 
@@ -38,10 +48,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify({username, password, pin})
             });
             const result = await response.text();
-            alert(result);
+            const errorMessageDiv = document.getElementById('signup-error');
+            errorMessageDiv.textContent = result;
+            errorMessageDiv.style.display = 'block';
+            errorMessageDiv.style.color = 'green';
+            if (result === 'Error registering user'){
+                errorMessageDiv.style.color = 'red';
+            }
+            //alert(result);
         } catch (error) {
             console.error('Registration error:', error);
-            alert('Error registering');
+            //alert('Error registering');
+            const errorMessageDiv = document.getElementById('signup-error');
+            errorMessageDiv.textContent = 'Error registering';
+            errorMessageDiv.style.display = 'block';
+            errorMessageDiv.style.color = 'red';
+
         }
     });
 
@@ -75,7 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const confirmNewPassword = document.getElementById('confirm-new-password').value;
 
         if (newPassword !== confirmNewPassword) {
-            alert('New passwords do not match!');
+            //alert('New passwords do not match!');
+            const errorMessageDiv = document.getElementById('reset-error');
+            errorMessageDiv.textContent = 'New passwords do not match!';
+            errorMessageDiv.style.display = 'block';
+            errorMessageDiv.style.color = 'red';
             return;
         }
 
@@ -87,14 +113,27 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (response.ok) {
-                alert('Password changed successfully');
+                //alert('Password changed successfully');
+                const errorMessageDiv = document.getElementById('reset-error');
+                errorMessageDiv.textContent = 'Password changed successfully!';
+                errorMessageDiv.style.display = 'block';
+                errorMessageDiv.style.color = 'green';
             } else {
                 const data = await response.json();
-                alert(data.message);
+                //alert(data.message);
+                const errorMessageDiv = document.getElementById('reset-error');
+                errorMessageDiv.textContent = data.message;
+                errorMessageDiv.style.display = 'block';
+                errorMessageDiv.style.color = 'red';
             }
         } catch (error) {
             console.error('Error changing password:', error);
-            alert('Error changing password. Please try again later.');
+            //alert('Error changing password. Please try again later.');
+            const errorMessageDiv = document.getElementById('reset-error');
+            errorMessageDiv.textContent = 'Error changing password. Please try again later.';
+            errorMessageDiv.style.display = 'block';
+            errorMessageDiv.style.color = 'red';
+            
         }
     });
 
