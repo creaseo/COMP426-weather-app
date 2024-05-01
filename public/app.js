@@ -81,10 +81,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify({userId, locationName})
             });
             const result = await response.text();
-            alert(result);
+            // alert(result);
         } catch (error) {
             console.error('Error favoriting:', error);
-            alert('Error favoriting');
+            // alert('Error favoriting');
         }
         fetchFavorites(userId);
     });
@@ -150,8 +150,20 @@ async function fetchAndDisplayWeather(location) {
     const temperature = document.getElementById('temperature');
     const weatherImage = document.getElementById('weather-image');
     const favButton = document.getElementById('fav-button');
+    const weatherBox = document.getElementById('weather-box');
+
+    // weatherDescription = document.createElement('div');
+    // weatherDescription.id = 'weather-description'; 
+
+    // const flex_container = document.createElement('div');
+    // flex_container.id = 'weather-box';
+    // flex_container.appendChild(weatherDescription);
+    // flex_container.appendChild(temperature);
+    // flex_container.appendChild(weatherImage);
 
     locationDisplay.textContent = `Weather for: ${location}`;
+    // favButton.style.display = "inline-block";
+    weatherBox.style.display = "inline-block";
 
     try {
         const response = await fetch(`/weather?location=${encodeURIComponent(location)}`);
@@ -163,12 +175,24 @@ async function fetchAndDisplayWeather(location) {
             weatherImage.src = weatherInfo.imageUrl;
             weatherImage.style.display = 'block';
             favButton.style.display = 'block';
+            const errorMessageDiv = document.getElementById('fetch-error');
+                errorMessageDiv.textContent = '';
+                errorMessageDiv.style.display = 'hidden';
+
         } else {
-            alert('Failed to fetch weather information.');
+            // alert('Failed to fetch weather information.');
+            const errorMessageDiv = document.getElementById('fetch-error');
+                errorMessageDiv.textContent = 'Invalid location';
+                errorMessageDiv.style.display = 'block';
+                errorMessageDiv.style.color = 'red';
         }
     } catch (error) {
         console.error('Error fetching weather:', error);
-        alert('Failed to fetch weather information.');
+        // alert('Failed to fetch weather information.');
+        const errorMessageDiv = document.getElementById('fetch-error');
+                errorMessageDiv.textContent = 'Invalid location';
+                errorMessageDiv.style.display = 'block';
+                errorMessageDiv.style.color = 'red';
     }
 }
 
@@ -181,8 +205,8 @@ function displayFavorites(favorites) {
         item.textContent = fav.locationName;
 
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.id = 'delete-button';
+        deleteButton.innerHTML = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg>';
+        deleteButton.className = 'delete-button';
         deleteButton.addEventListener('click', async () => {
             try {
                 const response = await fetch('/favorite/delete', {
@@ -191,11 +215,12 @@ function displayFavorites(favorites) {
                     body: JSON.stringify({ userId: fav.userId, locationName: fav.locationName })
                 });
                 const result = await response.text();
-                alert(result);
+                //alert(result);
+
                 fetchFavorites(fav.userId);
             } catch (error) {
                 console.error('Error deleting favorite:', error);
-                alert('Error deleting favorite');
+                // alert('Error deleting favorite');
             }
         });
 

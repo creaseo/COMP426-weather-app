@@ -11,6 +11,7 @@
 
 </head>
 <body>
+    <div class="container">
     <br>
     <h1>Weather App</h1>
     <br>
@@ -85,32 +86,37 @@
 
         
     </div>
-
     <div id="weather-app" class="hidden">
         <form id="location-form">
             <label for="location">Enter Location:</label>
             <input type="text" id="location" name="location" required>
             <button type="submit" class="weather-button">
-                <svg class="icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path>
-                </svg>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 16 16" height="1.5em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M15.504 13.616l-3.79-3.223c-0.392-0.353-0.811-0.514-1.149-0.499 0.895-1.048 1.435-2.407 1.435-3.893 0-3.314-2.686-6-6-6s-6 2.686-6 6 2.686 6 6 6c1.486 0 2.845-0.54 3.893-1.435-0.016 0.338 0.146 0.757 0.499 1.149l3.223 3.79c0.552 0.613 1.453 0.665 2.003 0.115s0.498-1.452-0.115-2.003zM6 10c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"></path></svg>
             </button>            
+            <br>
+            <div id="fetch-error" style="display: none;"></div>
             <div id="favorites">
-                <p>Favorites</p>
                 <div id="favoritesList"></div>
             </div>
         </form>
-        <div id="location-display-container">
-            <div id="location-display"></div>
-        </div>
-        <div id="weather-container">
-            <p id="weather-description"></p>
-            <p id="temperature"></p>
-            <img id="weather-image" src="">
-            <button id="fav-button" type="button">Favorite</button>
+        <div  style="display: none;" id="weather-box"> 
+            <div id="location-display-container">
+                <div id="location-display"></div>
+                <button style="display: none;" id="fav-button" type="button">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="3em" width="3em" xmlns="http://www.w3.org/2000/svg"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path></svg>
+                </button>
+            </div>
+            <div id="weather-container">
+                <div id="descriptions">
+                    <p id="weather-description"></p>
+                    <p id="temperature"></p>
+                </div>
+                <img id="weather-image" src="">
+            </div>
         </div>
     </div>
 
     <script src="app.js"></script>
+    </div>
 </body>
 </html>

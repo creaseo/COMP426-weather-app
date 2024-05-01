@@ -12,11 +12,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // LILA'S API KEYS
 const OPENWEATHERMAP_API_KEY = '6e20dc2507a1ed015f8094bfecba53ea';
-// const GOOGLE_API_KEY = 'AIzaSyAaph6fXjkWcaYsWBRXMWVD9CYDsvNJYoI';
+ const GOOGLE_API_KEY = 'AIzaSyAaph6fXjkWcaYsWBRXMWVD9CYDsvNJYoI';
 const GOOGLE_CX = 'd581af531cd44425a';
 
 // CHRIS'S API KEYS
-const GOOGLE_API_KEY = 'AIzaSyDG4aTR9c-LPzomHOU-dWruxj3yYllxT78'
+// const GOOGLE_API_KEY = 'AIzaSyDG4aTR9c-LPzomHOU-dWruxj3yYllxT78'
 
 // Mongoose + MongoDB
 
