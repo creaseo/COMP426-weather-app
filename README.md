@@ -1,8 +1,8 @@
 # COMP426 SP24 Final Project - Weather App
 
 **Group Members:**\
-Chloe Elizabeth - \
-Osoo Kwon - \
+Chloe Elizabeth - https://github.com/chloeecarroll \
+Osoo Kwon - https://github.com/osook \
 Chris Oh - https://github.com/creaseo \
 Li-La Youn - https://github.com/lilayoun
 
