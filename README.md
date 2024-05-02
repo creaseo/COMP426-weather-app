@@ -1,5 +1,9 @@
 # COMP426 SP24 Final Project - Weather App
 
+LINK TO PRESENTATION VIDEO: \
+https://youtu.be/IIp4O5ro3ZM \
+(The text in the video can be kind of hard to read so we recommend fullscreening in 1080p, thank you)
+
 **Group Members:**\
 Chloe Elizabeth - https://github.com/chloeecarroll \
 Osoo Kwon - https://github.com/osook \
